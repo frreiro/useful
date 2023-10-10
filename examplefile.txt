@@ -1,2 +1,0 @@
-alias ssh-personal='bash changesshkeys.sh personal'
-alias ssh-office='bash changesshkeys.sh office'
