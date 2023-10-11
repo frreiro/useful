@@ -1,16 +1,17 @@
 #!/bin/bash
 
 type=$1
-# personal_alias="alias ssh-personal='bash ~/bin/bash/changesshkeys.sh personal'"
-# office_alias="alias ssh-personal='bash ~/bin/bash/changesshkeys.sh office'"
 
-bin_path=/usr/local/bin/changesshkeys.sh
+FOLDER=/usr/local/bin
+bin_path=$FOLDER/changesshkeys.sh
 aliasbashfile=~/.bash_aliases
 personal_alias="alias ssh-personal='bash $bin_path personal'"
 office_alias="alias ssh-office='bash $bin_path office'"
 
 
-
+install(){
+    sudo cp ./changesshkeys.sh $FOLDER
+}
 
 has_alias(){
     has_personal_alias_text=$(find $aliasbashfile -type f -exec grep -Hn "$personal_alias" {} \; 2>/dev/null | wc -l)
@@ -33,6 +34,13 @@ has_alias(){
         echo "Found nothing, creating file and alias"
     fi
 }
+
+
+if [[ ! -f "$bin_path" ]]; 
+then
+    install 
+    has_alias
+fi
 
 
 
